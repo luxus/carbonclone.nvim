@@ -1,7 +1,6 @@
+-- desolate.nvim
 --
--- m o n o t o n e
---
---
+-- Copyright 2022 He4eT
 -- Copyright 2021 Kim Silkebækken
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
