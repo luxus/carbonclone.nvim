@@ -54,6 +54,9 @@ vim.g.desolate_contrast
 ## Configuration example
 
 ### Default settings
+
+![Default colors](screenshots/default.png)
+
 ```lua
 vim.g.desolate_h = 0
 vim.g.desolate_s = 0
