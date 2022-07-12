@@ -124,6 +124,7 @@ return lush(function()
 		MoreMsg({ fg = colors.identifier, gui = "bold" }), -- |more-prompt|
 		NonText({ fg = colors.nt }), -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
 		NormalFloat({ bg = colors[7], fg = colors[1] }), -- Normal text in floating windows.
+		FloatBorder({ NormalFloat }), -- Borders in floating windows.
 		NormalNC({}), -- Normal text in non-current windows
 		Pmenu({ NormalFloat }), -- Popup menu: Normal item.
 		PmenuSel({ fg = colors.bg, bg = colors.fg }), -- Popup menu: selected item.
