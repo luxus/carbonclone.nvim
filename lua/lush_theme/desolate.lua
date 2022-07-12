@@ -21,63 +21,61 @@
 -- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 -- IN THE SOFTWARE.
 
-vim.g.monotone_h = 0
-vim.g.monotone_s = 0
-vim.g.monotone_l = 70
-vim.g.monotone_contrast = 120
-
 local lush = require("lush")
 local hsl = lush.hsl
 
 local offset_fn = "lighten"
 
---
-
-local red = hsl("#ff5111")
-local yellow = hsl("#ffc812")
-local yellow2 = hsl("#ffd700")
-
-local green = hsl("#4e9a06")
-local white = hsl("#ffffff")
-
 -- Config params
 
 local params = {
-	contrast = (tonumber(vim.g.monotone_contrast) or 100) / 100,
+	contrast = (tonumber(vim.g.desolate_contrast) or 120) / 100,
 	base_color = hsl(
-		tonumber(vim.g.monotone_h) or 15,
-		tonumber(vim.g.monotone_s) or 5,
-		tonumber(vim.g.monotone_l) or 50),
+		tonumber(vim.g.desolate_h) or 0,
+		tonumber(vim.g.desolate_s) or 0,
+		tonumber(vim.g.desolate_l) or 70),
+
+	fg = vim.g.desolate_fg or "#cdcdcd",
+	bg = vim.g.desolate_bg or "#383838",
+
+	constant = vim.g.desolate_constant or "#ffd700",
+	identifier = vim.g.desolate_identifier or "#ffc812",
+	statement = vim.g.desolate_statement or "#ffffff",
+
+	error = vim.g.desolate_error or "#ff5111",
+	warning = vim.g.desolate_warning or "#ffc812",
+	success = vim.g.desolate_success or "#4e9a06",
+	info = vim.g.desolate_info or "#ffffff",
+}
+
+-- Main colors
+
+local colors = {
+	nt = params.base_color,
+
+	fg = hsl(params.fg),
+	bg = hsl(params.bg),
+
+	constant = hsl(params.constant),
+	identifier = hsl(params.identifier),
+	statement = hsl(params.statement),
+
+	error = hsl(params.error),
+	warning = hsl(params.warning),
+	success = hsl(params.success),
+	info = hsl(params.info),
 }
 
 -- Monochrome shades
 
-local colors = {}
-
+local offsets = { 50, 20, 10, 0, -10, -25, -45, -60, -70 }
 local shade = function(base_color, contrast, offset)
 	return base_color[offset_fn](contrast * offset)
 end
 
-local offsets = { 50, 20, 10, 0, -10, -25, -45, -60, -70 }
 for i, offset in pairs(offsets) do
 	colors[i] = shade(params.base_color, params.contrast, offset)
 end
-
-colors.fg = hsl("#cdcdcd")
-colors.bg = hsl("#383838")
-
--- Highlight colors
-
-colors.error = red
-colors.warning = yellow
-colors.success = green
-colors.info = white
-
-colors.constant = yellow2
-colors.identifier = yellow
-colors.statement = white
-
-colors.nt = colors[4]
 
 ---@diagnostic disable: undefined-global
 return lush(function()
