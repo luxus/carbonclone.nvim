@@ -53,7 +53,7 @@ vim.g.desolate_contrast
 
 ## Configuration example
 
-### Default settings
+### Default colors
 
 ![Default colors](screenshots/default.png)
 
@@ -74,4 +74,21 @@ vim.g.desolate_error = '#ff5111'
 vim.g.desolate_warning = '#ffc812'
 vim.g.desolate_success = '#4e9a06'
 vim.g.desolate_info = '#ffffff'
+```
+### Sketchy Evangelion Unit-01 colors
+
+![Sketchy Evangelion Unit-01 colors](screenshots/evangelion_unit_01.png)
+
+```lua
+vim.g.desolate_h = 210
+vim.g.desolate_s = 80
+vim.g.desolate_l = 120
+vim.g.desolate_contrast = 100
+
+vim.g.desolate_fg = '#9747ff'
+vim.g.desolate_bg = '#44335c'
+
+vim.g.desolate_constant = '#66ff66'
+vim.g.desolate_identifier = '#15f4ee'
+vim.g.desolate_statement = '#e13dc0'
 ```
