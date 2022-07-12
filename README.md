@@ -1,53 +1,74 @@
-# m o n o t o n e
+# desolate.nvim
 
-Another monochrome vim colorscheme. Inspired by various
-[other](https://github.com/ewilazarus/preto)
-[monochrome](https://github.com/pbrisbin/vim-colors-off)
-[colorschemes](https://github.com/fxn/vim-monochrome).
-
-Monotone is a middle ground between a regular colorscheme and [no syntax
-highlighting at all](https://www.kyleisom.net/blog/2012/10/17/syntax-off/). The
-colorscheme differentiates comments, strings and keywords with different
-weights and shades of gray. It emphasizes errors, warnings and search
-highlighting as shown in the screenshots below.
-
-This is a neovim-specific version of
-[vim-monotone](https://github.com/Lokaltog/vim-monotone) based on
-[lush.nvim](https://github.com/rktjmp/lush.nvim). This version includes full
-support for both dark and light `background`.
+Another not-so-colorful neovim colorscheme based on
+[m o n o t o n e](https://github.com/Lokaltog/monotone.nvim).
 
 ## Installation
 
-Monotone depends on [lush.nvim](https://github.com/rktjmp/lush.nvim). Example using packer.nvim:
+This colorscheme depends on [lush.nvim](https://github.com/rktjmp/lush.nvim). Example using packer.nvim:
 
 ```
 require('packer').startup(function()
   -- ...
   use 'rktjmp/lush.nvim'
-  use 'Lokaltog/monotone.nvim'
+  use 'He4eT/desolate.nvim'
   -- ...
 end)
 
-api.nvim_command 'colorscheme monotone'
+vim.cmd [[colorscheme desolate]]
 ```
 
 ## Customization
 
-The theme color may be customized by setting HSL values with
-`g:monotone_[hsl]`.
+The background and normal text colors can be configured with:
+```
+vim.g.desolate_bg
+vim.g.desolate_fg
+```
 
-You may adjust the colorscheme contrast to your liking by setting
-`g:monotone_contrast`.
+Accent colors may be defined by setting:
+```
+vim.g.desolate_constant
+vim.g.desolate_identifier
+vim.g.desolate_statement
+```
 
-The default contrast factor is 105. Recommended values are between 90 and 110.
+Colors for error, warning, success and info messages:
+```
+vim.g.desolate_error
+vim.g.desolate_warning
+vim.g.desolate_success
+vim.g.desolate_info
+```
+
+The base color may be customized by setting HSL values with:
+```
+vim.g.desolate_[hsl]
+```
+
+Also you may slightly adjust the colorscheme contrast to your liking by setting:
+```
+vim.g.desolate_contrast
+```
 
 ## Configuration example
 
+### Default settings
 ```
-vim.g.monotone_h = 85
-vim.g.monotone_s = 30
-vim.g.monotone_l = 50
-vim.g.monotone_contrast = 110
-vim.g.monotone_true_monotone = true
-vim.o.background = 'light'
+vim.g.desolate_h = 0
+vim.g.desolate_s = 0
+vim.g.desolate_l = 70
+vim.g.desolate_contrast = 120
+
+vim.g.desolate_fg = '#cdcdcd'
+vim.g.desolate_bg = '#383838'
+
+vim.g.desolate_constant = '#ffd700'
+vim.g.desolate_identifier = '#ffc812'
+vim.g.desolate_statement = '#ffffff'
+
+vim.g.desolate_error = '#ff5111'
+vim.g.desolate_warning = '#ffc812'
+vim.g.desolate_success = '#4e9a06'
+vim.g.desolate_info = '#ffffff'
 ```
