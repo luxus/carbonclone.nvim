@@ -15,6 +15,8 @@ require('packer').startup(function()
   -- ...
 end)
 
+-- Put your custom settings here
+
 vim.cmd [[colorscheme desolate]]
 ```
 
