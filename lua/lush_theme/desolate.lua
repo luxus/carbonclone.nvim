@@ -82,10 +82,10 @@ return lush(function()
 	return {
 		Normal({ fg = colors.fg, bg = colors.bg }), -- Normal text
 
-		SyntaxError({ fg = colors.error, gui = "underline" }),
-		SyntaxWarning({ fg = colors.warning, gui = "underline" }),
-		SyntaxInfo({ fg = colors.info, gui = "underline" }),
-		SyntaxHint({ fg = colors.success, gui = "underline" }),
+		SyntaxError({ fg = colors.error }),
+		SyntaxWarning({ fg = colors.warning }),
+		SyntaxInfo({ fg = colors.info }),
+		SyntaxHint({ fg = colors.success }),
 
 		Comment({ fg = colors[6] }), -- any comment
 		ColorColumn({ bg = colors[6] }), -- used for the columns set with 'colorcolumn'
@@ -195,9 +195,9 @@ return lush(function()
 
 		Todo({ fg = colors.identifier, gui = "bold" }), -- (preferred) anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
-		LspReferenceText({ gui = "underline", fg = colors.statement }), -- used for highlighting "text" references
-		LspReferenceRead({ gui = "underline", fg = colors.statement }), -- used for highlighting "read" references
-		LspReferenceWrite({ gui = "underline", fg = colors.success }), -- used for highlighting "write" references
+		LspReferenceText({ fg = colors.statement }), -- used for highlighting "text" references
+		LspReferenceRead({ fg = colors.statement }), -- used for highlighting "read" references
+		LspReferenceWrite({ fg = colors.success }), -- used for highlighting "write" references
 
 		IndentBlanklineChar({ fg = colors[8] }),
 		IndentBlanklineContextChar({ fg = colors.nt }),
