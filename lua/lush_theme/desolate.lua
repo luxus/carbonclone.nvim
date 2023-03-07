@@ -24,58 +24,89 @@
 local lush = require("lush")
 local hsl = lush.hsl
 
-local offset_fn = "lighten"
-
 -- Config params
 
 local params = {
-	contrast = (tonumber(vim.g.desolate_contrast) or 120) / 100,
+	contrast = (tonumber(vim.g.desolate_contrast) or 110) / 100,
 	base_color = hsl(
-		tonumber(vim.g.desolate_h) or 0,
-		tonumber(vim.g.desolate_s) or 0,
-		tonumber(vim.g.desolate_l) or 70),
+		tonumber(vim.g.desolate_h) or 15,
+		tonumber(vim.g.desolate_s) or 5,
+		tonumber(vim.g.desolate_l) or 50),
 
-	fg = vim.g.desolate_fg or "#cdcdcd",
-	bg = vim.g.desolate_bg or "#383838",
+	fg = vim.g.desolate_fg,
+	bg = vim.g.desolate_bg,
 
-	constant = vim.g.desolate_constant or "#ffd700",
-	identifier = vim.g.desolate_identifier or "#ffc812",
-	statement = vim.g.desolate_statement or "#ffffff",
+	constant = vim.g.desolate_constant,
+	identifier = vim.g.desolate_identifier,
+	statement = vim.g.desolate_statement,
 
-	error = vim.g.desolate_error or "#ff5111",
-	warning = vim.g.desolate_warning or "#ffc812",
-	success = vim.g.desolate_success or "#4e9a06",
-	info = vim.g.desolate_info or "#ffffff",
+	error = vim.g.desolate_error or '#ff0000',
+	warning = vim.g.desolate_warning or '#ffff00',
+	success = vim.g.desolate_success or '#00ff00',
+	info = vim.g.desolate_info or '#0000ff',
 }
+
+-- Offset function
+
+local offset_fn = "lighten"
+if vim.o.background == "light" then
+	offset_fn = "darken"
+	params.base_color = params.base_color.darken(50)
+end
 
 -- Main colors
 
-local colors = {
-	nt = params.base_color,
-
-	fg = hsl(params.fg),
-	bg = hsl(params.bg),
-
-	constant = hsl(params.constant),
-	identifier = hsl(params.identifier),
-	statement = hsl(params.statement),
-
-	error = hsl(params.error),
-	warning = hsl(params.warning),
-	success = hsl(params.success),
-	info = hsl(params.info),
-}
+local colors = {}
 
 -- Monochrome shades
 
-local offsets = { 50, 20, 10, 0, -10, -25, -45, -60, -70 }
 local shade = function(base_color, contrast, offset)
 	return base_color[offset_fn](contrast * offset)
 end
 
+local offsets = { 50, 20, 10, 0, -10, -25, -45, -60, -70 }
 for i, offset in pairs(offsets) do
 	colors[i] = shade(params.base_color, params.contrast, offset)
 end
+
+-- Logical colors
+
+local useHex = function(hexColor, fallback)
+	if hexColor then
+		return hsl(hexColor)
+	else
+		return fallback
+	end
+end
+
+colors.nt = params.base_color
+
+colors.fg = useHex(
+	params.fg,
+	shade(params.base_color, params.contrast, 100))
+
+colors.bg = useHex(
+	params.bg,
+	shade(params.base_color, params.contrast, -100))
+
+colors.constant = useHex(
+	params.constant,
+	colors[0])
+
+colors.identifier = useHex(
+	params.identifier,
+	colors[1])
+
+colors.statement = useHex(
+	params.statement,
+	colors[2])
+
+colors.error = hsl(params.error)
+colors.warning = hsl(params.warning)
+colors.success = hsl(params.success)
+colors.info = hsl(params.info)
+
+-- Highlights
 
 ---@diagnostic disable: undefined-global
 return lush(function()
@@ -284,7 +315,6 @@ return lush(function()
 		TreesitterContext({ fg = colors[3] }),
 
 		-- Lightspeed
-
 		LightspeedGreyWash({ Comment }),
 		LightspeedLabel({ fg = colors.statement }),
 		LightspeedOverlapped({ fg = colors.statement.darken(15), gui = "underline" }),
@@ -297,5 +327,11 @@ return lush(function()
 		LightspeedOneCharMatch({ LightspeedShortcut, gui = "none" }),
 		LightspeedUniqueChar({ LightspeedUnlabeledMatch }),
 		LightspeedPendingOpArea({ LightspeedShortcut, gui = "underline" }),
+
+		-- Leap
+		LeapBackdrop({ Comment }),
+		LeapLabelPrimary({ Identifier }),
+		LeapMatch({ Constant }),
+		LeapLabelSecondary({ Statement }),
 	}
 end)
