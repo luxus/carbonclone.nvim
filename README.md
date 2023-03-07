@@ -1,6 +1,8 @@
+![Default colors](screenshots/default.png)
+
 # desolate.nvim
 
-Another not-so-colorful neovim colorscheme based on
+Another customizable and not-so-colorful neovim colorscheme based on
 [m o n o t o n e](https://github.com/Lokaltog/monotone.nvim).
 
 ## Installation
@@ -10,8 +12,7 @@ This colorscheme depends on [lush.nvim](https://github.com/rktjmp/lush.nvim). Ex
 ```lua
 require('packer').startup(function()
   -- ...
-  use 'rktjmp/lush.nvim'
-  use 'He4eT/desolate.nvim'
+  use { 'He4eT/desolate.nvim', requires = { 'rktjmp/lush.nvim' } }
   -- ...
 end)
 
@@ -21,6 +22,8 @@ vim.cmd [[colorscheme desolate]]
 ```
 
 ## Customization
+
+I recommend that you first set the background color, adjust the HSL, and then pick accents for the statements, identifiers and constants.
 
 The background and normal text colors can be configured with:
 ```lua
@@ -83,8 +86,8 @@ vim.g.desolate_info = '#ffffff'
 
 ```lua
 vim.g.desolate_h = 210
-vim.g.desolate_s = 80
-vim.g.desolate_l = 120
+vim.g.desolate_s = 55
+vim.g.desolate_l = 60
 vim.g.desolate_contrast = 100
 
 vim.g.desolate_fg = '#9747ff'
