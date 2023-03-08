@@ -1,9 +1,9 @@
-![Default colors](screenshots/default.png)
-
 # desolate.nvim
 
 Another customizable and not-so-colorful neovim colorscheme based on
 [m o n o t o n e](https://github.com/Lokaltog/monotone.nvim).
+
+![Default colors](screenshots/default.png)
 
 ## Installation
 
