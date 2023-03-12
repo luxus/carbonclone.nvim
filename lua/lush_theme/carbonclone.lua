@@ -1,5 +1,6 @@
--- desolate.nvim
+-- carbonclone.nvim
 --
+-- Copyright 2023 luxus
 -- Copyright 2022 He4eT
 -- Copyright 2021 Kim Silkebækken
 --
@@ -27,23 +28,24 @@ local hsl = lush.hsl
 -- Config params
 
 local params = {
-	contrast = (tonumber(vim.g.desolate_contrast) or 110) / 100,
+	contrast = (tonumber(vim.g.carbonclone_contrast) or 110) / 100,
 	base_color = hsl(
-		tonumber(vim.g.desolate_h) or 15,
-		tonumber(vim.g.desolate_s) or 5,
-		tonumber(vim.g.desolate_l) or 50),
+		tonumber(vim.g.carbonclone_h) or 15,
+		tonumber(vim.g.carbonclone_s) or 5,
+		tonumber(vim.g.carbonclone_l) or 50
+	),
 
-	fg = vim.g.desolate_fg,
-	bg = vim.g.desolate_bg,
+	fg = vim.g.carbonclone_fg,
+	bg = vim.g.carbonclone_bg,
 
-	constant = vim.g.desolate_constant,
-	identifier = vim.g.desolate_identifier,
-	statement = vim.g.desolate_statement,
+	constant = vim.g.carbonclone_constant,
+	identifier = vim.g.carbonclone_identifier,
+	statement = vim.g.carbonclone_statement,
 
-	error = vim.g.desolate_error or '#ff0000',
-	warning = vim.g.desolate_warning or '#ffff00',
-	success = vim.g.desolate_success or '#00ff00',
-	info = vim.g.desolate_info or '#0000ff',
+	error = vim.g.carbonclone_error or "#ff0000",
+	warning = vim.g.carbonclone_warning or "#ffff00",
+	success = vim.g.carbonclone_success or "#00ff00",
+	info = vim.g.carbonclone_info or "#0000ff",
 }
 
 -- Offset function
@@ -81,25 +83,15 @@ end
 
 colors.nt = params.base_color
 
-colors.fg = useHex(
-	params.fg,
-	shade(params.base_color, params.contrast, 100))
+colors.fg = useHex(params.fg, shade(params.base_color, params.contrast, 100))
 
-colors.bg = useHex(
-	params.bg,
-	shade(params.base_color, params.contrast, -100))
+colors.bg = useHex(params.bg, shade(params.base_color, params.contrast, -100))
 
-colors.constant = useHex(
-	params.constant,
-	colors[0])
+colors.constant = useHex(params.constant, colors[0])
 
-colors.identifier = useHex(
-	params.identifier,
-	colors[1])
+colors.identifier = useHex(params.identifier, colors[1])
 
-colors.statement = useHex(
-	params.statement,
-	colors[2])
+colors.statement = useHex(params.statement, colors[2])
 
 colors.error = hsl(params.error)
 colors.warning = hsl(params.warning)
@@ -118,7 +110,7 @@ return lush(function()
 		SyntaxInfo({ fg = colors.info }),
 		SyntaxHint({ fg = colors.success }),
 
-		Comment({ fg = colors[6] }), -- any comment
+		Comment({ fg = colors[4], gui = "italic" }), -- any comment
 		ColorColumn({ bg = colors[6] }), -- used for the columns set with 'colorcolumn'
 		Conceal({}), -- placeholder characters substituted for concealed text (see 'conceallevel')
 		Cursor({ fg = colors.bg, bg = colors.identifier }), -- character under the cursor
